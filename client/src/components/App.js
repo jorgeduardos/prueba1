@@ -7,21 +7,24 @@ class App extends React.Component{
 	constructor(props) {
 		super(props);
 		this.state = {
-			length: 220,
-			stateSketch: sketch,
+			randomColor1: 0,
+			randomColor2: 0,
+			randomColor3: 0,
+			stateSketch: sketch
 		};
 	}
 
-	lengthChange(e){
+	colorChange(e){
 		e.preventDefault();
-		this.setState({length:e.target.value});
+		this.setState({randomColor1: Math.round(Math.random(0,255)*255), randomColor2: Math.round(Math.random(0,255)*255), randomColor3: Math.round(Math.random(0,255)*255)});
 	}
 
 	render () {
-		console.log(this.state.length);
+		console.log(this.state.randomColor);
 		return (
 			<div>
-				<P5Wrapper sketch={this.state.stateSketch} length={this.state.length}/>
+				<P5Wrapper sketch={this.state.stateSketch} color1={this.state.randomColor1} color2={this.state.randomColor2} color3={this.state.randomColor3}/>
+				<button onClick={this.colorChange.bind(this)}>Random Background Color</button>
 			</div>
 		);
 	}

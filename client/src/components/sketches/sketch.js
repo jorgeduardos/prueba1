@@ -25,8 +25,8 @@ export default function sketch (p) {
   };
 
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
-    if (props.length){
-      length = props.length;
+    if (props.color1){
+      b1 = p.color(props.color1, props.color2, props.color3);
     }
   };
 
