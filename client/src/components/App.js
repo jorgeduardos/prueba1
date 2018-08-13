@@ -22,7 +22,6 @@ class App extends React.Component{
 		return (
 			<div>
 				<P5Wrapper sketch={this.state.stateSketch} length={this.state.length}/>
-				<input type="range" value={this.state.length}  min="220"  max="600" step="1" onInput={this.lengthChange.bind(this)}/>
 			</div>
 		);
 	}
