@@ -1,12 +1,14 @@
 export default function sketch (p) {
-  let length = 0;
+
   var rectangles = [];
-  let angle = 0;
 
   // gradient related 
   var Y_AXIS = 1;
   var X_AXIS = 2;
   var b1, b2, c1, c2;
+
+  var img;
+  var loop;
 
   p.setup = function () {
     p.createCanvas(800, 800);
@@ -16,42 +18,45 @@ export default function sketch (p) {
     //gradient related
     b1 = p.color(10,24,191);
     b2 = p.color(176,234,209);
-    c1 = p.color(204, 102, 0);
-    c2 = p.color(0, 102, 153);
-
-    for (var i = 0; i < 5; i++) {
-      rectangles[i] = new Rectangle(p.random(0,0), p.random(0, 0), p.random(200,500), p.random(200, 500), p.random (-5,5), p.random(-5,5));
+    c1 = p.color(10,24,191);
+    c2 = p.color(176,234,209);
+    loop = true;
+    for (var i = 0; i < 10; i++) {
+      rectangles[i] = new Rectangle(0 , 0, ((8-i)*100) - 100, ((8-i)*100) - 100);
     }
   };
 
+  /*
+    Ordered squares
+      rectangles[i] = new Rectangle(0 , 0, ((8-i)*100) - 100, ((8-i)*100) - 100);
+    disordered
+      widht and height have to be different random numbers
+  */
+
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
-    if (props.color1){
-      b1 = p.color(props.color1, props.color2, props.color3);
+    if(props.frameRate){
+      props.frameRate == "stop" ? loop=false : loop=true;
+    }
+    if (props.clicked){
+      b1 = p.color(props.background1.color1, props.background1.color2, props.background1.color3);
+      b2 = p.color(props.background1.colorB1, props.background1.colorB2, props.background1.colorB3);
     }
   };
 
   p.draw = function () {
-    // p.noLoop();
-    // console.log(p.width);
     setGradient(0, 0, p.width, p.height, b1, b2, X_AXIS);
     setGradient(0, 0, p.width, p.height/2, c1, c2, X_AXIS);
-    // p.fill(255,0,0);
-    // p.noStroke();
-    // p.rect(0, -800, 1200, 1200);
     p.push();
     p.blendMode(p.DIFFERENCE);
-    p.translate(400,400);
+    p.translate(400, 400);
     for (var i = 0; i < rectangles.length; i++) {
       rectangles[i].display(i);
-      // rectangles[i].move();
-      rectangles[i].rotate(1);
-      // rectangles[i].bounce();
+      loop ? rectangles[i].rotate(1) : null
     }
-    // angle = angle-0.8;
     p.pop();
   };
 
-  function Rectangle(posx1, posy1, l, h, velx, vely){
+  function Rectangle(posx1, posy1, l, h){
     this.id = 0;
     this.r = p.random(0,255);
     this.g = p.random(0,255);
@@ -60,14 +65,12 @@ export default function sketch (p) {
     this.y1 = posy1;
     this.l = l;
     this.h = h;
-    this.velx = velx;
-    this.vely = vely;
     this.deg = 0;
     this.rotate = function(direction){
       if(direction == 1){
-        this.deg += p.random(0.5, 2);
+        this.deg += p.random(0.5, 3);
       }else{
-        this.deg += p.random(-0.5,-2);
+        this.deg += p.random(-0.5,-5);
       }
     }
     this.display = function(id){
@@ -77,21 +80,6 @@ export default function sketch (p) {
       p.fill(this.r, this.g, this.b);
       p.rect(this.x1, this.y1, this.l, this.h);
       this.id = id;
-    }
-    this.move = function(){
-      this.x1 += this.velx;
-      this.y1 += this.vely;
-    }
-    this.bounce = function(){
-      if(this.x1 > 0 && this.x1 < p.width && this.y1 > p.height){
-        this.vely = this.vely * -1;
-      }else if(this.x1 > p.width && this.y1 > 0 && this.y1 < p.height){
-        this.velx = this.velx * -1;
-      }else if(this.x1 > 0 && this.x1 < p.width && this.y1 < 0){
-        this.vely = this.vely * -1;
-      }else if(this.x1 < 0 && this.y1 > 0 && this.y1 < p.height){
-        this.velx = this.velx * -1;
-      }
     }
   }
 
