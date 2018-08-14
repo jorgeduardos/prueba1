@@ -20,31 +20,43 @@ class Main extends Component {
 			background2: {
 				color1: 0,
 				color2: 0,
-				color3: 0
+				color3: 0,
+				colorB1: 0,
+				colorB2: 0,
+				colorB3: 0
 			},
 			frameRate: "play",
+			order: 1,
 			clicked: false,
-			endpoint: "http://09fbb7b7.ngrok.io"
+			endpoint: "http://127.0.0.1:4001"
 		};
 
 		this.sendBackgroundColors = this.sendBackgroundColors.bind(this);
 		this.playFrameRate = this.playFrameRate.bind(this);
 		this.stopFrameRate = this.stopFrameRate.bind(this);
 		this.sendBackgroundColors =this.sendBackgroundColors.bind(this);
+		this.sendOrder = this.sendOrder.bind(this);
 	}
 
 	componentDidMount(){
 		const {endpoint} = this.state;
 		const socket = socketIOClient(endpoint);
-		socket.on("change color", color => this.setState({ color }));
 		socket.on("newRandomColors", colors => this.setState({
 			background1:{
-				color1: colors.color1,
-				color2: colors.color2,
-				color3: colors.color3,
-				colorB1: colors.colorB1,
-				colorB2: colors.colorB2,
-				colorB3: colors.colorB3
+				color1: colors.background1.color1,
+				color2: colors.background1.color2,
+				color3: colors.background1.color3,
+				colorB1: colors.background1.colorB1,
+				colorB2: colors.background1.colorB2,
+				colorB3: colors.background1.colorB3
+			},
+			background2:{
+				color1: colors.background2.color1,
+				color2: colors.background2.color2,
+				color3: colors.background2.color3,
+				colorB1: colors.background2.colorB1,
+				colorB2: colors.background2.colorB2,
+				colorB3: colors.background2.colorB3
 			},
 			clicked: true
 		}))
@@ -54,6 +66,11 @@ class Main extends Component {
 		socket.on("stopAnimation", v => this.setState({
 			frameRate: v
 		}))
+		socket.on("orderReceived", v => {
+			this.setState({
+				order: v
+			});
+		})
 	}
 
 	stopFrameRate(e){
@@ -72,14 +89,31 @@ class Main extends Component {
 		e.preventDefault();
 		const socket = socketIOClient(this.state.endpoint);
 		var colors = {
-			color1: this.randomNumber(255),
-			color2: this.randomNumber(255),
-			color3: this.randomNumber(255),
-			colorB1: this.randomNumber(255),
-			colorB2: this.randomNumber(255),
-			colorB3: this.randomNumber(255)
+			background1:{
+				color1: this.randomNumber(255),
+				color2: this.randomNumber(255),
+				color3: this.randomNumber(255),
+				colorB1: this.randomNumber(255),
+				colorB2: this.randomNumber(255),
+				colorB3: this.randomNumber(255)
+			},
+			background2:{
+				color1: this.randomNumber(255),
+				color2: this.randomNumber(255),
+				color3: this.randomNumber(255),
+				colorB1: this.randomNumber(255),
+				colorB2: this.randomNumber(255),
+				colorB3: this.randomNumber(255)
+			}
 		}
 		socket.emit('randomBackground', colors);
+	}
+
+	sendOrder(e){
+		e.preventDefault();
+		const socket = socketIOClient(this.state.endpoint);
+		var order = this.state.order == 1 ? 2 : 1; 
+		socket.emit('order', order);
 	}
 
 	randomNumber(number){
@@ -92,8 +126,8 @@ class Main extends Component {
 		return(
 			<Router>
 				<div>
-					<Route exact path="/" render={ (props) => <UI sendBackgroundColors={this.sendBackgroundColors} playFrameRate={this.playFrameRate} stopFrameRate={this.stopFrameRate} color={this.state.color} sendBackgroundColors={this.sendBackgroundColors} />} />
-					<Route exact path="/art" render={ (props) => <App background1={this.state.background1} frameRate={this.state.frameRate} clicked={this.state.clicked} />} />
+					<Route exact path="/" render={ (props) => <UI sendBackgroundColors={this.sendBackgroundColors} playFrameRate={this.playFrameRate} stopFrameRate={this.stopFrameRate} sendOrder={this.sendOrder} />} />
+					<Route exact path="/art" render={ (props) => <App background1={this.state.background1} background2={this.state.background2} frameRate={this.state.frameRate} clicked={this.state.clicked} order={this.state.order} />} />
 				</div>
 			</Router>
 		)

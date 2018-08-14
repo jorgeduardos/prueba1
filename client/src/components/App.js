@@ -12,10 +12,9 @@ class App extends React.Component{
 	}
 
 	render () {
-		console.log(this.props.frameRate);
 		return (
 			<div>
-				<P5Wrapper sketch={this.state.stateSketch} background1={this.props.background1} clicked={this.props.clicked} frameRate={this.props.frameRate}/>
+				<P5Wrapper sketch={this.state.stateSketch} background1={this.props.background1} background2={this.props.background2} clicked={this.props.clicked} frameRate={this.props.frameRate} order={this.props.order}/>
 			</div>
 		);
 	}

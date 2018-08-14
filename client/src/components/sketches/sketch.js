@@ -1,7 +1,7 @@
 export default function sketch (p) {
 
   var rectangles = [];
-
+  var disorderedRectangles = [];
   // gradient related 
   var Y_AXIS = 1;
   var X_AXIS = 2;
@@ -9,6 +9,7 @@ export default function sketch (p) {
 
   var img;
   var loop;
+  var order;
 
   p.setup = function () {
     p.createCanvas(800, 800);
@@ -21,8 +22,11 @@ export default function sketch (p) {
     c1 = p.color(10,24,191);
     c2 = p.color(176,234,209);
     loop = true;
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 6; i++) {
       rectangles[i] = new Rectangle(0 , 0, ((8-i)*100) - 100, ((8-i)*100) - 100);
+    }
+    for (var i = 0; i < 6; i++) {
+      disorderedRectangles[i] = new Rectangle(0 , 0, p.round(p.random(100, 600)), p.round(p.random(100, 600)));
     }
   };
 
@@ -40,6 +44,12 @@ export default function sketch (p) {
     if (props.clicked){
       b1 = p.color(props.background1.color1, props.background1.color2, props.background1.color3);
       b2 = p.color(props.background1.colorB1, props.background1.colorB2, props.background1.colorB3);
+      c1 = p.color(props.background2.color1, props.background2.color2, props.background2.color3);
+      c2 = p.color(props.background2.colorB1, props.background2.colorB2, props.background2.colorB3);
+    }
+    if(props.order){
+      console.log('order props: ', props.order);
+      order = props.order;
     }
   };
 
@@ -49,9 +59,17 @@ export default function sketch (p) {
     p.push();
     p.blendMode(p.DIFFERENCE);
     p.translate(400, 400);
-    for (var i = 0; i < rectangles.length; i++) {
-      rectangles[i].display(i);
-      loop ? rectangles[i].rotate(1) : null
+  
+    if(order == 1){
+      for (var i = 0; i < rectangles.length; i++) {
+        rectangles[i].display(i);
+        loop ? rectangles[i].rotate(1) : null
+      }
+    }else{
+      for (var i = 0; i < disorderedRectangles.length; i++) {
+        disorderedRectangles[i].display(i);
+        loop ? disorderedRectangles[i].rotate(1) : null
+      }
     }
     p.pop();
   };
@@ -81,6 +99,10 @@ export default function sketch (p) {
       p.rect(this.x1, this.y1, this.l, this.h);
       this.id = id;
     }
+  }
+
+  function createRectangles(){
+
   }
 
   function setGradient(x, y, w, h, c1, c2, axis) {

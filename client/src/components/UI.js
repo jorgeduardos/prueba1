@@ -13,6 +13,7 @@ class UI extends Component {
 				<button onClick={this.props.sendBackgroundColors}>Random Background Color</button>
 				<button onClick={this.props.stopFrameRate}>Stop Animation</button>
 				<button onClick={this.props.playFrameRate}>Play Animation</button>
+				<button onClick={this.props.sendOrder}>Change Order</button>
 			</div>
 
 		)

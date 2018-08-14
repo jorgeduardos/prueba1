@@ -37,6 +37,12 @@ io.on('connection', socket => {
 		io.sockets.emit("stopAnimation", v);
 	})
 
+	socket.on('order', v =>{
+		console.log("Chaging Order to: ", v);
+		io.sockets.emit('orderReceived', v);
+	})
+
+
 	socket.on('disconnect', () => {
 		console.log('User has disconnected');
 	})
