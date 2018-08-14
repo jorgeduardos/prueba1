@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
 
-const port = 8000;
+const port = 4001;
 
 const app = express();
 
@@ -17,9 +17,24 @@ app.get('/', (req, res)=> {
 io.on('connection', socket => {
 	console.log('User has connected');
 
-	socket.on('change color', color => {
+	socket.on('changeColor', color => {
 		console.log('Color Change to: ', color);
 		io.sockets.emit('change color', color);
+	})
+
+	socket.on('randomBackground', colors => {
+		console.log("received colors: ", colors);
+		io.sockets.emit("newRandomColors", colors);
+	})
+
+	socket.on('playFramerate', v => {
+		console.log("Play Animation");
+		io.sockets.emit("playAnimation", v);
+	})
+
+	socket.on('stopFramerate', v =>{
+		console.log("Stop Animation");
+		io.sockets.emit("stopAnimation", v);
 	})
 
 	socket.on('disconnect', () => {
