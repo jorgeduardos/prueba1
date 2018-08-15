@@ -6,6 +6,44 @@ class UI extends Component {
 		super(props);
 	}
 
+	currentBlendMode(v){
+
+		var blenMode;
+		switch(v){
+	      case 1: 
+	        blenMode = "DIFFERENCE";
+	        break;
+	      case 2:
+	        blenMode = "SOFT_LIGHT";
+	        break;
+	      case 3:
+	        blenMode = "LIGHTEST";
+	        break;
+	      case 4:
+	        blenMode = "BLEND";
+	        break;
+	      case 5:
+	        blenMode = "DARKEST";
+	        break;
+	      case 6:
+	        blenMode = "MULTIPLY";
+	        break;
+	      case 7:
+	        blenMode = "SOFT_LIGHT";
+	        break;
+	      case 8:
+	        blenMode = "HARD_LIGHT";
+	        break;
+	      case 9:
+	        blenMode = "DODGE";
+	        break;
+	      case 10:
+	        blenMode = "SCREEN";
+	        break;
+    	}
+    	return blenMode;
+	}
+
 	render(){
 		return(
 			<div>
@@ -17,6 +55,7 @@ class UI extends Component {
 				<button onClick={this.props.sendBlendMode}>Change Blend Mode</button>
 				<button onClick={this.props.sendSpeed}>+</button>
 				<button onClick={this.props.sendDecreseSpeed}>-</button>
+				<h3>Current Blend Mode: {this.currentBlendMode(this.props.blendMode)}</h3>
 			</div>
 
 		)

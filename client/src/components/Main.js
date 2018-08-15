@@ -30,8 +30,8 @@ class Main extends Component {
 			blendMode: 1,
 			rotationSpeed: 0.1,
 			clicked: false,
-			endpoint: "http://127.0.0.1:4001"
-			// endpoint: window.location.hostname
+			// endpoint: "http://127.0.0.1:4001"
+			endpoint: window.location.hostname
 		};
 		// this.setState({
 		// 	prueba: window.location.hostname;
@@ -44,6 +44,7 @@ class Main extends Component {
 		this.sendOrder = this.sendOrder.bind(this);
 		this.sendBlendMode = this.sendBlendMode.bind(this);
 		this.sendSpeed = this.sendSpeed.bind(this);
+		this.sendDecreseSpeed = this.sendDecreseSpeed.bind(this);
 	}
 
 	componentDidMount(){
@@ -137,7 +138,7 @@ class Main extends Component {
 		e.preventDefault();
 		const socket = socketIOClient(this.state.endpoint);
 		var blendMode;
-		this.state.blendMode < 9 ? blendMode = this.state.blendMode + 1: blendMode = 1;
+		this.state.blendMode < 10 ? blendMode = this.state.blendMode + 1: blendMode = 1;
 		socket.emit('blendMode', blendMode);
 
 	}
@@ -168,7 +169,7 @@ class Main extends Component {
 		return(
 			<Router>
 				<div>
-					<Route exact path="/" render={ (props) => <UI sendBackgroundColors={this.sendBackgroundColors} playFrameRate={this.playFrameRate} stopFrameRate={this.stopFrameRate} sendOrder={this.sendOrder} sendBlendMode={this.sendBlendMode} sendSpeed={this.sendSpeed} sendDecreseSpeed={this.sendDecreseSpeed}/>} />
+					<Route exact path="/" render={ (props) => <UI blendMode={this.state.blendMode} sendBackgroundColors={this.sendBackgroundColors} playFrameRate={this.playFrameRate} stopFrameRate={this.stopFrameRate} sendOrder={this.sendOrder} sendBlendMode={this.sendBlendMode} sendSpeed={this.sendSpeed} sendDecreseSpeed={this.sendDecreseSpeed}/>} />
 					<Route exact path="/art" render={ (props) => <App background1={this.state.background1} background2={this.state.background2} frameRate={this.state.frameRate} clicked={this.state.clicked} order={this.state.order} blendMode={this.state.blendMode} rotationSpeed={this.state.rotationSpeed}/>} />
 				</div>
 			</Router>

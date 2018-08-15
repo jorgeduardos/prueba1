@@ -27,9 +27,6 @@ export default function sketch (p) {
     for (var i = 0; i < 6; i++) {
       rectangles[i] = new Rectangle(0 , 0, ((8-i)*100) - 100, ((8-i)*100) - 100);
     }
-    for (var i = 0; i < 6; i++) {
-      disorderedRectangles[i] = new Rectangle(0 , 0, p.round(p.random(100, 600)), p.round(p.random(100, 600)));
-    }
   };
 
   /*
@@ -50,6 +47,9 @@ export default function sketch (p) {
       c2 = p.color(props.background2.colorB1, props.background2.colorB2, props.background2.colorB3);
     }
     if(props.order){
+      for (var i = 0; i < 6; i++) {
+        disorderedRectangles[i] = new Rectangle(0 , 0, p.random(100, 800), p.random(100, 800));
+      }
       order = props.order;
     }
     if(props.blendMode){
@@ -93,6 +93,8 @@ export default function sketch (p) {
       case 9:
         p.blendMode(p.DODGE);
         break;
+      case 10:
+        p.blendMode(p.SCREEN);
     }
     p.translate(p.windowWidth/2, p.windowHeight/2);
   
