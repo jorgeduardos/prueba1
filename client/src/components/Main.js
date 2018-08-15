@@ -28,9 +28,12 @@ class Main extends Component {
 			frameRate: "play",
 			order: 1,
 			clicked: false,
-			endpoint: "http://127.0.0.1:4001"
+			endpoint: window.location.hostname
 		};
-
+		// this.setState({
+		// 	prueba: window.location.hostname;
+		// })
+		
 		this.sendBackgroundColors = this.sendBackgroundColors.bind(this);
 		this.playFrameRate = this.playFrameRate.bind(this);
 		this.stopFrameRate = this.stopFrameRate.bind(this);
@@ -123,6 +126,7 @@ class Main extends Component {
 	}
 
 	render(){
+		console.log("prueba de hostname: ", this.state.prueba);
 		return(
 			<Router>
 				<div>

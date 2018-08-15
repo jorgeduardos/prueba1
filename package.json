@@ -2,14 +2,23 @@
   "name": "art-project",
   "version": "1.0.0",
   "description": "Alloy art project",
-  "main": "index.js",
+  "engines": {
+    "node": "8.11.1",
+    "npm": "5.6.0"
+  },
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "nodemon server.js",
+    "client": "cd client/ && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && cd client/ && npm install && npm run build"
   },
   "author": "Alloy (Jorge Sosa, Jorge Robles)",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^3.6.1",
     "express": "^4.16.3",
+    "nodemon": "^1.18.3",
     "socket.io": "^2.1.1"
   }
 }
