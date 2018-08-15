@@ -10,10 +10,6 @@ const server = http.createServer(app);
 
 const io = socketIO(server);
 
-app.get('/', (req, res)=> {
-	res.send(`<h1>Hello User, running on PORT:${PORT} </h1>`);
-})
-
 io.on('connection', socket => {
 	console.log('User has connected');
 
@@ -48,6 +44,16 @@ io.on('connection', socket => {
 	})
 
 });
+
+if (process.env.NODE_ENV === "production") {
+	// Express will serve up production assests
+	app.use(express.static("client/build"));
+	// Express will serve up the index.html file if it doesn't recognize the route
+	const path = require("path");
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+	});
+}
 
 server.listen(PORT, () => {
 	console.log(`listening on port ${PORT}`);
