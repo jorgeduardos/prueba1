@@ -53,6 +53,11 @@ io.on('connection', socket => {
 		io.sockets.emit('decreaseRotationSpeedReceived', v);
 	})
 
+	socket.on('addSquare', v => {
+		console.log('adding square: ', v);
+		io.sockets.emit('addSquareReceived', v);
+	})
+
 	socket.on('disconnect', () => {
 		console.log('User has disconnected');
 	})

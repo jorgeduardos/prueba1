@@ -14,7 +14,7 @@ class App extends React.Component{
 	render () {
 		return (
 			<div>
-				<P5Wrapper sketch={this.state.stateSketch} background1={this.props.background1} background2={this.props.background2} clicked={this.props.clicked} frameRate={this.props.frameRate} order={this.props.order} blendMode={this.props.blendMode} rotationSpeed={this.props.rotationSpeed}/>
+				<P5Wrapper squaresToDisplay={this.props.squaresToDisplay} sketch={this.state.stateSketch} background1={this.props.background1} background2={this.props.background2} clicked={this.props.clicked} frameRate={this.props.frameRate} order={this.props.order} blendMode={this.props.blendMode} rotationSpeed={this.props.rotationSpeed}/>
 			</div>
 		);
 	}

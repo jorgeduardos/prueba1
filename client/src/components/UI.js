@@ -55,6 +55,7 @@ class UI extends Component {
 				<button onClick={this.props.sendBlendMode}>Change Blend Mode</button>
 				<button onClick={this.props.sendSpeed}>+</button>
 				<button onClick={this.props.sendDecreseSpeed}>-</button>
+				<button onClick={this.props.sendAddSquare}>Add Square</button>
 				<h3>Current Blend Mode: {this.currentBlendMode(this.props.blendMode)}</h3>
 			</div>
 

@@ -14,18 +14,21 @@ export default function sketch (p) {
   var blendMode;
   var rotationSpeed;
 
+  var numberSquares = 9;
+  var squaresToDisplay;
+
   p.setup = function () {
     p.createCanvas(p.windowWidth, p.windowHeight);
     p.angleMode(p.DEGREES);
 
     //gradient related
-    b1 = p.color(10,24,191);
-    b2 = p.color(176,234,209);
-    c1 = p.color(10,24,191);
-    c2 = p.color(176,234,209);
+    b1 = p.color(10,233,226);
+    b2 = p.color(83,55,241);
+    c1 = p.color(83,55,241);
+    c2 = p.color(10,233,226);
     loop = true;
-    for (var i = 0; i < 6; i++) {
-      rectangles[i] = new Rectangle(0 , 0, ((8-i)*100) - 100, ((8-i)*100) - 100);
+    for (var i = 0; i < numberSquares; i++) {
+      rectangles[i] = new Rectangle(0 , 0, ((numberSquares-i)*100) - 100, ((numberSquares-i)*100) - 100);
     }
   };
 
@@ -47,7 +50,7 @@ export default function sketch (p) {
       c2 = p.color(props.background2.colorB1, props.background2.colorB2, props.background2.colorB3);
     }
     if(props.order){
-      for (var i = 0; i < 6; i++) {
+      for (var i = 0; i < numberSquares; i++) {
         disorderedRectangles[i] = new Rectangle(0 , 0, p.random(100, 800), p.random(100, 800));
       }
       order = props.order;
@@ -57,6 +60,9 @@ export default function sketch (p) {
     }
     if(props.rotationSpeed){
       rotationSpeed = props.rotationSpeed;
+    }
+    if(props.squaresToDisplay){
+      squaresToDisplay = props.squaresToDisplay;
     }
 
   };
@@ -99,13 +105,13 @@ export default function sketch (p) {
     p.translate(p.windowWidth/2, p.windowHeight/2);
   
     if(order == 1){
-      for (var i = 0; i < rectangles.length; i++) {
-        rectangles[i].display(i);
+      for (var i = 0; i < squaresToDisplay; i++) {
+        rectangles[i].display(i, colorPallets.colorPallet0.squares[i]);
         loop ? rectangles[i].rotate(1, rotationSpeed) : null
       }
     }else{
-      for (var i = 0; i < disorderedRectangles.length; i++) {
-        disorderedRectangles[i].display(i);
+      for (var i = 0; i < squaresToDisplay; i++) {
+        disorderedRectangles[i].display(i, colorPallets.colorPallet0.squares[i]);
         loop ? disorderedRectangles[i].rotate(1, rotationSpeed) : null
       }
     }
@@ -164,6 +170,12 @@ export default function sketch (p) {
       }
     }
     p.pop();
+  }
+
+  var colorPallets = {
+    colorPallet0: {
+      squares:["#ffff2c", "#fae148", "#f6c365", "#f1a581", "#ed869d", "#e868b9", "#e44ad6", "#df2cf2"]
+    }
   }
 
 };
