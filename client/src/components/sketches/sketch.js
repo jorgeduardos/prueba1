@@ -12,7 +12,7 @@ export default function sketch (p) {
   var order;
 
   p.setup = function () {
-    p.createCanvas(800, 800);
+    p.createCanvas(p.windowWidth, p.windowHeight);
     p.angleMode(p.DEGREES);
     // p.frameRate(60)
 
@@ -58,7 +58,7 @@ export default function sketch (p) {
     setGradient(0, 0, p.width, p.height/2, c1, c2, X_AXIS);
     p.push();
     p.blendMode(p.DIFFERENCE);
-    p.translate(400, 400);
+    p.translate(p.windowWidth/2, p.windowHeight/2);
   
     if(order == 1){
       for (var i = 0; i < rectangles.length; i++) {
