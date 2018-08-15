@@ -1,5 +1,6 @@
 export default function sketch (p) {
-
+  
+  // p5.disableFriendlyErrors = true;
   var rectangles = [];
   var disorderedRectangles = [];
   // gradient related 
@@ -14,7 +15,6 @@ export default function sketch (p) {
   p.setup = function () {
     p.createCanvas(p.windowWidth, p.windowHeight);
     p.angleMode(p.DEGREES);
-    // p.frameRate(60)
 
     //gradient related
     b1 = p.color(10,24,191);
@@ -54,6 +54,7 @@ export default function sketch (p) {
   };
 
   p.draw = function () {
+    console.log(p.frameRate());
     setGradient(0, 0, p.width, p.height, b1, b2, X_AXIS);
     setGradient(0, 0, p.width, p.height/2, c1, c2, X_AXIS);
     p.push();
@@ -86,7 +87,7 @@ export default function sketch (p) {
     this.deg = 0;
     this.rotate = function(direction){
       if(direction == 1){
-        this.deg += p.random(0.5, 3);
+        this.deg += 1;
       }else{
         this.deg += p.random(-0.5,-5);
       }
