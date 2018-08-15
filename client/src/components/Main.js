@@ -27,8 +27,11 @@ class Main extends Component {
 			},
 			frameRate: "play",
 			order: 1,
+			blendMode: 1,
+			rotationSpeed: 0.1,
 			clicked: false,
-			endpoint: window.location.hostname
+			endpoint: "http://127.0.0.1:4001"
+			// endpoint: window.location.hostname
 		};
 		// this.setState({
 		// 	prueba: window.location.hostname;
@@ -39,6 +42,8 @@ class Main extends Component {
 		this.stopFrameRate = this.stopFrameRate.bind(this);
 		this.sendBackgroundColors =this.sendBackgroundColors.bind(this);
 		this.sendOrder = this.sendOrder.bind(this);
+		this.sendBlendMode = this.sendBlendMode.bind(this);
+		this.sendSpeed = this.sendSpeed.bind(this);
 	}
 
 	componentDidMount(){
@@ -74,6 +79,15 @@ class Main extends Component {
 				order: v
 			});
 		})
+		socket.on("blendModeReceived", v => this.setState({
+			blendMode: v
+		}))
+		socket.on("rotationSpeedReceived", v => this.setState({
+			rotationSpeed: v
+		}))
+		socket.on('decreaseRotationSpeedReceived', v => this.setState({
+			rotationSpeed: v
+		}))
 	}
 
 	stopFrameRate(e){
@@ -119,6 +133,31 @@ class Main extends Component {
 		socket.emit('order', order);
 	}
 
+	sendBlendMode(e){
+		e.preventDefault();
+		const socket = socketIOClient(this.state.endpoint);
+		var blendMode;
+		this.state.blendMode < 9 ? blendMode = this.state.blendMode + 1: blendMode = 1;
+		socket.emit('blendMode', blendMode);
+
+	}
+
+	sendSpeed(e){
+		e.preventDefault();
+		const socket = socketIOClient(this.state.endpoint);
+		var rotationSpeed;
+		this.state.rotationSpeed < 1 ? rotationSpeed = this.state.rotationSpeed + 0.1 : rotationSpeed = 1;
+		socket.emit('rotationSpeed', rotationSpeed);
+	}
+
+	sendDecreseSpeed(e){
+		e.preventDefault();
+		const socket = socketIOClient(this.state.endpoint);
+		var rotationSpeed;
+		this.state.rotationSpeed > 0.1 ? rotationSpeed = this.state.rotationSpeed - 0.1 : rotationSpeed = 0.1;
+		socket.emit('decreseRotationSpeed', rotationSpeed);
+	}
+
 	randomNumber(number){
 		var randomNumber;
 		randomNumber = Math.round(Math.random(0, number)*255);
@@ -126,12 +165,11 @@ class Main extends Component {
 	}
 
 	render(){
-		console.log("prueba de hostname: ", this.state.prueba);
 		return(
 			<Router>
 				<div>
-					<Route exact path="/" render={ (props) => <UI sendBackgroundColors={this.sendBackgroundColors} playFrameRate={this.playFrameRate} stopFrameRate={this.stopFrameRate} sendOrder={this.sendOrder} />} />
-					<Route exact path="/art" render={ (props) => <App background1={this.state.background1} background2={this.state.background2} frameRate={this.state.frameRate} clicked={this.state.clicked} order={this.state.order} />} />
+					<Route exact path="/" render={ (props) => <UI sendBackgroundColors={this.sendBackgroundColors} playFrameRate={this.playFrameRate} stopFrameRate={this.stopFrameRate} sendOrder={this.sendOrder} sendBlendMode={this.sendBlendMode} sendSpeed={this.sendSpeed} sendDecreseSpeed={this.sendDecreseSpeed}/>} />
+					<Route exact path="/art" render={ (props) => <App background1={this.state.background1} background2={this.state.background2} frameRate={this.state.frameRate} clicked={this.state.clicked} order={this.state.order} blendMode={this.state.blendMode} rotationSpeed={this.state.rotationSpeed}/>} />
 				</div>
 			</Router>
 		)

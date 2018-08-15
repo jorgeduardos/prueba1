@@ -34,10 +34,24 @@ io.on('connection', socket => {
 	})
 
 	socket.on('order', v =>{
-		console.log("Chaging Order to: ", v);
+		console.log("Changing Order to: ", v);
 		io.sockets.emit('orderReceived', v);
 	})
+	
+	socket.on('blendMode', v => {
+		console.log("Changing Blend Mode to: ", v);
+		io.sockets.emit('blendModeReceived', v);
+	})
 
+	socket.on('rotationSpeed', v => {
+		console.log("Chaging Speed to: ", v);
+		io.sockets.emit('rotationSpeedReceived', v);
+	})
+
+	socket.on('decreseRotationSpeed', v => {
+		console.log("Chaging Speed to: ", v);
+		io.sockets.emit('decreaseRotationSpeedReceived', v);
+	})
 
 	socket.on('disconnect', () => {
 		console.log('User has disconnected');

@@ -11,6 +11,8 @@ export default function sketch (p) {
   var img;
   var loop;
   var order;
+  var blendMode;
+  var rotationSpeed;
 
   p.setup = function () {
     p.createCanvas(p.windowWidth, p.windowHeight);
@@ -48,28 +50,61 @@ export default function sketch (p) {
       c2 = p.color(props.background2.colorB1, props.background2.colorB2, props.background2.colorB3);
     }
     if(props.order){
-      console.log('order props: ', props.order);
       order = props.order;
     }
+    if(props.blendMode){
+      blendMode = props.blendMode;
+    }
+    if(props.rotationSpeed){
+      rotationSpeed = props.rotationSpeed;
+    }
+
   };
 
   p.draw = function () {
-    console.log(p.frameRate());
     setGradient(0, 0, p.width, p.height, b1, b2, X_AXIS);
     setGradient(0, 0, p.width, p.height/2, c1, c2, X_AXIS);
     p.push();
-    p.blendMode(p.DIFFERENCE);
+    switch(blendMode){
+      case 1: 
+        p.blendMode(p.DIFFERENCE);
+        break;
+      case 2:
+        p.blendMode(p.SOFT_LIGHT);
+        break;
+      case 3:
+        p.blendMode(p.LIGHTEST);
+        break;
+      case 4:
+        p.blendMode(p.BLEND);
+        break;
+      case 5:
+        p.blendMode(p.DARKEST);
+        break;
+      case 6:
+        p.blendMode(p.MULTIPLY);
+        break;
+      case 7:
+        p.blendMode(p.SOFT_LIGHT);
+        break;
+      case 8:
+        p.blendMode(p.HARD_LIGHT);
+        break;
+      case 9:
+        p.blendMode(p.DODGE);
+        break;
+    }
     p.translate(p.windowWidth/2, p.windowHeight/2);
   
     if(order == 1){
       for (var i = 0; i < rectangles.length; i++) {
         rectangles[i].display(i);
-        loop ? rectangles[i].rotate(1) : null
+        loop ? rectangles[i].rotate(1, rotationSpeed) : null
       }
     }else{
       for (var i = 0; i < disorderedRectangles.length; i++) {
         disorderedRectangles[i].display(i);
-        loop ? disorderedRectangles[i].rotate(1) : null
+        loop ? disorderedRectangles[i].rotate(1, rotationSpeed) : null
       }
     }
     p.pop();
@@ -85,11 +120,11 @@ export default function sketch (p) {
     this.l = l;
     this.h = h;
     this.deg = 0;
-    this.rotate = function(direction){
+    this.rotate = function(direction, speed){
       if(direction == 1){
-        this.deg += 1;
+        this.deg += speed;
       }else{
-        this.deg += p.random(-0.5,-5);
+        this.deg += speed;
       }
     }
     this.display = function(id){
