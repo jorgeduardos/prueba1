@@ -58,3 +58,5 @@ if (process.env.NODE_ENV === "production") {
 server.listen(PORT, () => {
 	console.log(`listening on port ${PORT}`);
 })
+
+// https://stackoverflow.com/questions/40528053/npm-install-and-build-of-forked-github-repo
