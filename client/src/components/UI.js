@@ -48,24 +48,34 @@ class UI extends Component {
 	render(){
 		return(
 			<div id="UI">
+				<header><h1>CHROMA</h1><h3>Alloy</h3></header>
 				<div className="UiContainer">
-					<div className="uiControlersContainer">
+					<div className="uiControlersContainer uppercase">
 						<div className="row center">
-							<div className="small-6"><button className="btn btnPush" onClick={this.props.sendColorPallet}>Change Color Pallet</button></div>
-							<div className="small-6"><button className="btn btnPush" onClick={this.props.sendBlendMode}>Change Blend Mode</button></div>
+							<div className="cell small-12">
+								<label>Color</label>
+								<button className="btn btnPush" onClick={this.props.sendColorPallet}>Change</button>
+							</div>
+							<div className="cell small-12">
+								<label>Blend</label>
+								<button className="btn btnPush" onClick={this.props.sendBlendMode}>Change</button>
+							</div>
 						</div>
 						<div className="row center">
-							<div className="small-6">
+							<div className="cell small-12">
+								<label>Play Pause</label>
 								<button className="btnIcon" onClick={this.props.playFrameRate}><i className="icon ion-md-play"/></button>
 								<button className="btnIcon" onClick={this.props.stopFrameRate}><i className="icon ion-md-pause"/></button>
 							</div>
-							<div className="small-6">
+							<div className="cell small-12">
+								<label>Speed</label>
 								<button className="btnIcon" onClick={this.props.sendSpeed}><i className="icon ion-md-add-circle"/></button>
 								<button className="btnIcon" onClick={this.props.sendDecreseSpeed}><i className="icon ion-md-remove-circle"/></button>
 							</div>
 						</div>
-						<button className="btn btnPush" onClick={this.props.sendOrder}>Change Order</button>
-						<button className="btn btnPush" onClick={this.props.sendAddSquare}>Add Square</button>
+						<div className="row center">
+							<button className="btn btnPush" onClick={this.props.sendAddSquare}>Add Square</button>
+						</div>
 					</div>
 					<h3>Current Blend Mode: {this.currentBlendMode(this.props.blendMode)}</h3>
 					<div className="logoContainer">

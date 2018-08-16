@@ -3,35 +3,42 @@ body, html{
 	margin: 0;
 	padding: 0;
 }
+
+header{
+  padding-left: 50px;
+  padding-right: 50px;
+  color: white;
+  background-color: black;
+}
+
+header h1{
+  letter-spacing: 4px;
+  display: inline-block;
+}
+
+header h3{
+  margin-left: 150px;
+  display: inline-block;
+}
+
 .UiContainer{
+  height: 80vh;
 	padding: 50px;
+  background: linear-gradient(#0ae9e2, #5337f1);
 }
 
 .btn {
-  width: 120px;
+  text-transform: uppercase;
+  width: 150px;
   padding: 0;
-  margin: 10px 20px 10px 0;
-  font-weight: 600;
+  font-size: 1.1em;
   text-align: center;
   line-height: 50px;
   color: #FFF;
-  border-radius: 5px;
+  border-radius: 100px;
   transition: all 0.2s ;
-  background: #00AE68;
+  background: #000;
   border-color: none;
-}
-
-.btn.btnPush {
-  box-shadow: 0px 5px 0px 0px #007144;
-}
-
-.btnPush:hover {
-  margin-top: 15px;
-  margin-bottom: 5px;
-}
-
-.btn.btnPush:hover {
-  box-shadow: 0px 0px 0px 0px #007144;
 }
 
 .btnIcon{
@@ -43,11 +50,16 @@ body, html{
 .logoContainer{
 	width: 33%;
 	margin: auto;
-	margin-top: 100px;
+	margin-top: 30px;
 }
 
 .logoContainer img{
 	width: 100%;
+}
+
+label{
+  display: block;
+  margin-bottom: 5px;
 }
 
 
@@ -61,7 +73,18 @@ body, html{
 	text-align: center;
 }
 
+.cell{
+  margin-bottom: 20px;
+}
+
 .small-6{
 	width: 50%;
 	display: inline-block;
+}
+.small-12{
+  width: 100%;
+}
+
+.uppercase{
+  text-transform: uppercase;
 }
