@@ -18,9 +18,9 @@ io.on('connection', socket => {
 		io.sockets.emit('change color', color);
 	})
 
-	socket.on('randomBackground', colors => {
-		console.log("received colors: ", colors);
-		io.sockets.emit("newRandomColors", colors);
+	socket.on('colorPallet', colorPallet => {
+		console.log("color pallet: ", colorPallet);
+		io.sockets.emit("colorPalletReceived", colorPallet);
 	})
 
 	socket.on('playFramerate', v => {

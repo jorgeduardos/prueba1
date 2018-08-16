@@ -10,22 +10,22 @@ export default function sketch (p) {
 
   var img;
   var loop;
-  var order;
   var blendMode;
   var rotationSpeed;
 
   var numberSquares = 9;
   var squaresToDisplay;
+  var colorPallet = 0;
 
   p.setup = function () {
     p.createCanvas(p.windowWidth, p.windowHeight);
     p.angleMode(p.DEGREES);
 
     //gradient related
-    b1 = p.color(10,233,226);
-    b2 = p.color(83,55,241);
-    c1 = p.color(83,55,241);
-    c2 = p.color(10,233,226);
+    b1 = p.color("#0ae9e2");
+    b2 = p.color("#5337f1");
+    c1 = p.color("#5337f1");
+    c2 = p.color("#0ae9e2");
     loop = true;
     for (var i = 0; i < numberSquares; i++) {
       rectangles[i] = new Rectangle(0 , 0, ((numberSquares-i)*100) - 100, ((numberSquares-i)*100) - 100);
@@ -44,16 +44,11 @@ export default function sketch (p) {
       props.frameRate == "stop" ? loop=false : loop=true;
     }
     if (props.clicked){
-      b1 = p.color(props.background1.color1, props.background1.color2, props.background1.color3);
-      b2 = p.color(props.background1.colorB1, props.background1.colorB2, props.background1.colorB3);
-      c1 = p.color(props.background2.color1, props.background2.color2, props.background2.color3);
-      c2 = p.color(props.background2.colorB1, props.background2.colorB2, props.background2.colorB3);
-    }
-    if(props.order){
-      for (var i = 0; i < numberSquares; i++) {
-        disorderedRectangles[i] = new Rectangle(0 , 0, p.random(100, 800), p.random(100, 800));
-      }
-      order = props.order;
+        colorPallet = props.colorPallet;
+        b1 = p.color(colorPallets[colorPallet].backgrounds[0]);
+        b2 = p.color(colorPallets[colorPallet].backgrounds[1]);
+        c1 = p.color(colorPallets[colorPallet].backgrounds[1]);
+        c2 = p.color(colorPallets[colorPallet].backgrounds[0]);
     }
     if(props.blendMode){
       blendMode = props.blendMode;
@@ -79,13 +74,13 @@ export default function sketch (p) {
         p.blendMode(p.SOFT_LIGHT);
         break;
       case 3:
-        p.blendMode(p.LIGHTEST);
+        p.blendMode(p.EXCLUSION);
         break;
       case 4:
         p.blendMode(p.BLEND);
         break;
       case 5:
-        p.blendMode(p.DARKEST);
+        p.blendMode(p.OVERLAY);
         break;
       case 6:
         p.blendMode(p.MULTIPLY);
@@ -103,18 +98,10 @@ export default function sketch (p) {
         p.blendMode(p.SCREEN);
     }
     p.translate(p.windowWidth/2, p.windowHeight/2);
-  
-    if(order == 1){
-      for (var i = 0; i < squaresToDisplay; i++) {
-        rectangles[i].display(i, colorPallets.colorPallet0.squares[i]);
-        loop ? rectangles[i].rotate(1, rotationSpeed) : null
-      }
-    }else{
-      for (var i = 0; i < squaresToDisplay; i++) {
-        disorderedRectangles[i].display(i, colorPallets.colorPallet0.squares[i]);
-        loop ? disorderedRectangles[i].rotate(1, rotationSpeed) : null
-      }
-    }
+    for (var i = 0; i < squaresToDisplay; i++) {
+      rectangles[i].display(i, colorPallets[colorPallet].squares[i]);
+      loop ? rectangles[i].rotate(1, rotationSpeed) : null
+    }     
     p.pop();
   };
 
@@ -135,18 +122,14 @@ export default function sketch (p) {
         this.deg += speed;
       }
     }
-    this.display = function(id){
+    this.display = function(id, squareColors){
       p.noStroke();
       p.rectMode(p.CENTER);
       p.rotate(this.deg);
-      p.fill(this.r, this.g, this.b);
+      p.fill(p.color(squareColors));
       p.rect(this.x1, this.y1, this.l, this.h);
       this.id = id;
     }
-  }
-
-  function createRectangles(){
-
   }
 
   function setGradient(x, y, w, h, c1, c2, axis) {
@@ -172,10 +155,15 @@ export default function sketch (p) {
     p.pop();
   }
 
-  var colorPallets = {
-    colorPallet0: {
+  var colorPallets = [
+    {
+      backgrounds: ["#0ae9e2", "#5337f1"],
       squares:["#ffff2c", "#fae148", "#f6c365", "#f1a581", "#ed869d", "#e868b9", "#e44ad6", "#df2cf2"]
-    }
-  }
+    },
+    { 
+      backgrounds: ["#e866d3", "#80379c"],
+      squares:["#fe9c8f", "#feb2a8", "#fec8c1", "#fad9c1", "#f9caa7", "#faf0e6", "#fff5ee", "#fdf5e6"]
 
+    }
+  ]
 };
