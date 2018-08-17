@@ -31,6 +31,7 @@ class Main extends Component {
 		this.sendSpeed = this.sendSpeed.bind(this);
 		this.sendDecreseSpeed = this.sendDecreseSpeed.bind(this);
 		this.sendAddSquare = this.sendAddSquare.bind(this);
+		this.sendRemoveSquare = this.sendRemoveSquare.bind(this);
 	}
 
 	componentDidMount(){
@@ -63,6 +64,9 @@ class Main extends Component {
 		socket.on('addSquareReceived', v => this.setState({
 			squaresToDisplay: v
 		}))
+		socket.on('removeSquareReceived', v => this.setState({
+			squaresToDisplay: v
+		}))
 	}
 
 	stopFrameRate(e){
@@ -91,6 +95,14 @@ class Main extends Component {
 		var squaresToDisplay;
 		this.state.squaresToDisplay < 8 ? squaresToDisplay = this.state.squaresToDisplay + 1 : squaresToDisplay = 8;
 		socket.emit('addSquare', squaresToDisplay);
+	}
+
+	sendRemoveSquare(e){
+		e.preventDefault();
+		const socket = socketIOClient(this.state.endpoint);
+		var squaresToDisplay;
+		this.state.squaresToDisplay > 2 ? squaresToDisplay = this.state.squaresToDisplay - 1 : squaresToDisplay = 2;
+		socket.emit('removeSquare', squaresToDisplay);
 	}
 
 	sendOrder(e){
@@ -130,7 +142,7 @@ class Main extends Component {
 		return(
 			<Router>
 				<div>
-					<Route exact path="/" render={ (props) => <UI sendAddSquare={this.sendAddSquare} blendMode={this.state.blendMode} sendColorPallet={this.sendColorPallet} playFrameRate={this.playFrameRate} stopFrameRate={this.stopFrameRate} sendOrder={this.sendOrder} sendBlendMode={this.sendBlendMode} sendSpeed={this.sendSpeed} sendDecreseSpeed={this.sendDecreseSpeed}/>} />
+					<Route exact path="/" render={ (props) => <UI colorPallet={this.state.colorPallet} sendAddSquare={this.sendAddSquare} sendRemoveSquare={this.sendRemoveSquare} blendMode={this.state.blendMode} sendColorPallet={this.sendColorPallet} playFrameRate={this.playFrameRate} stopFrameRate={this.stopFrameRate} sendOrder={this.sendOrder} sendBlendMode={this.sendBlendMode} sendSpeed={this.sendSpeed} sendDecreseSpeed={this.sendDecreseSpeed}/>} />
 					<Route exact path="/art" render={ (props) => <App squaresToDisplay={this.state.squaresToDisplay} colorPallet={this.state.colorPallet} frameRate={this.state.frameRate} clicked={this.state.clicked} order={this.state.order} blendMode={this.state.blendMode} rotationSpeed={this.state.rotationSpeed}/>} />
 				</div>
 			</Router>

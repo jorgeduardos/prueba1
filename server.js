@@ -57,6 +57,10 @@ io.on('connection', socket => {
 		console.log('adding square: ', v);
 		io.sockets.emit('addSquareReceived', v);
 	})
+	socket.on('removeSquare', v => {
+		console.log('removing square to: ', v);
+		io.sockets.emit('removeSquareReceived', v);
+	})
 
 	socket.on('disconnect', () => {
 		console.log('User has disconnected');

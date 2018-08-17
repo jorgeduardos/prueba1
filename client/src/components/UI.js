@@ -2,10 +2,36 @@ import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import './styles/ui.css';
 
+var styles = {
+	background: 'linear-gradient(#0ae9e2, #5337f1)'
+}
+
 class UI extends Component {
 	constructor(props){
 		super(props);
+		this.state ={
+			colorPallets:[
+			    {
+			      backgrounds: ["#0ae9e2", "#5337f1"],
+			      squares:["#ffff2c", "#fae148", "#f6c365", "#f1a581", "#ed869d", "#e868b9", "#e44ad6", "#df2cf2"]
+			    },
+			    { 
+			      backgrounds: ["#e866d3", "#80379c"],
+			      squares:["#fe9c8f", "#feb2a8", "#fec8c1", "#fad9c1", "#f9caa7", "#faf0e6", "#fff5ee", "#fdf5e6"]
+
+			    }
+			]
+		}
+
+		this.backgroundSetter = this.backgroundSetter.bind(this);
 	}
+
+	backgroundSetter(){
+		var color;
+		color = {background: `linear-gradient(${this.state.colorPallets[this.props.colorPallet].backgrounds[0]}, ${this.state.colorPallets[this.props.colorPallet].backgrounds[1]})`};
+		return color;
+	}
+
 
 	currentBlendMode(v){
 
@@ -46,10 +72,11 @@ class UI extends Component {
 	}
 
 	render(){
+		// change blend mode to only display soft and hard!
 		return(
 			<div id="UI">
-				<header><h1>CHROMA</h1><h3>Alloy</h3></header>
-				<div className="UiContainer">
+				<header><h1>CHROMA</h1><h3>alloy</h3></header>
+				<div style={this.backgroundSetter()} className="UiContainer">
 					<div className="uiControlersContainer uppercase">
 						<div className="row center">
 							<div className="cell small-12">
@@ -59,6 +86,7 @@ class UI extends Component {
 							<div className="cell small-12">
 								<label>Blend</label>
 								<button className="btn btnPush" onClick={this.props.sendBlendMode}>Change</button>
+								<p id="blendModeP">Current Blend Mode: {this.currentBlendMode(this.props.blendMode)}</p>
 							</div>
 						</div>
 						<div className="row center">
@@ -74,10 +102,13 @@ class UI extends Component {
 							</div>
 						</div>
 						<div className="row center">
-							<button className="btn btnPush" onClick={this.props.sendAddSquare}>Add Square</button>
+							<div className="cell small-12">
+								<label>Squares</label>
+								<button className="btn btnPush" onClick={this.props.sendAddSquare}>Add Square</button>
+								<button className="btn btnPush" onClick={this.props.sendRemoveSquare}>Remove Square</button>
+							</div>
 						</div>
 					</div>
-					<h3>Current Blend Mode: {this.currentBlendMode(this.props.blendMode)}</h3>
 					<div className="logoContainer">
 						<img src={require('./sketches/assets/alloy-wink.png')} alt="Alloy Wink Logo"/>
 					</div>

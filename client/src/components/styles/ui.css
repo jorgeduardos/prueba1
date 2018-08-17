@@ -5,8 +5,7 @@ body, html{
 }
 
 header{
-  padding-left: 50px;
-  padding-right: 50px;
+  padding: 20px 40px 20px 20px;
   color: white;
   background-color: black;
 }
@@ -14,17 +13,25 @@ header{
 header h1{
   letter-spacing: 4px;
   display: inline-block;
+  height: inherit;
+  margin: 0;
 }
 
 header h3{
-  margin-left: 150px;
+  /*margin-left: 150px;*/
   display: inline-block;
+  float: right;
+  height: inherit;
+  margin: 0;
+  padding-top: 5px;
+  letter-spacing: 2px;
+
 }
 
 .UiContainer{
-  height: 80vh;
-	padding: 50px;
-  background: linear-gradient(#0ae9e2, #5337f1);
+  height: 90vh;
+	padding: 20px 50px;
+  /*background: linear-gradient(#0ae9e2, #5337f1);*/
 }
 
 .btn {
@@ -42,24 +49,30 @@ header h3{
 }
 
 .btnIcon{
-	font-size: 2em;
-	margin: 10px 20px 10px 0;
+	font-size: 3em;
 }
 
 
 .logoContainer{
-	width: 33%;
+	width: 80%;
 	margin: auto;
 	margin-top: 30px;
+  text-align: center;
 }
 
 .logoContainer img{
-	width: 100%;
+	width: 80px;
 }
 
 label{
   display: block;
   margin-bottom: 5px;
+}
+
+#blendModeP{
+  text-transform: none;
+  font-size: 0.8em;
+  margin-bottom: 10px;
 }
 
 
