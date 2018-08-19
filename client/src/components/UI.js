@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import './styles/ui.css';
 
-var styles = {
-	background: 'linear-gradient(#0ae9e2, #5337f1)'
-}
-
 class UI extends Component {
 	constructor(props){
 		super(props);
@@ -75,7 +71,7 @@ class UI extends Component {
 		// change blend mode to only display soft and hard!
 		return(
 			<div id="UI">
-				<header><h1>CHROMA</h1><h3>alloy</h3></header>
+				<header><img id="chromaLogo" src={require("./styles/assets/chroma-logo.svg")} alt="Chroma Logo"/><img id="alloyLogo" src={require("./styles/assets/alloy-logo.svg")} alt="alloy logo"/></header>
 				<div style={this.backgroundSetter()} className="UiContainer">
 					<div className="uiControlersContainer uppercase">
 						<div className="row center">
@@ -84,29 +80,28 @@ class UI extends Component {
 								<button className="btn btnPush" onClick={this.props.sendColorPallet}>Change</button>
 							</div>
 							<div className="cell small-12">
-								<label>Blend</label>
+								<label>Intensity</label>
 								<button className="btn btnPush" onClick={this.props.sendBlendMode}>Change</button>
 								<p id="blendModeP">Current Blend Mode: {this.currentBlendMode(this.props.blendMode)}</p>
 							</div>
 						</div>
 						<div className="row center">
 							<div className="cell small-12">
-								<label>Play Pause</label>
-								<button className="btnIcon" onClick={this.props.playFrameRate}><i className="icon ion-md-play"/></button>
-								<button className="btnIcon" onClick={this.props.stopFrameRate}><i className="icon ion-md-pause"/></button>
+									<label>Speed</label>
+									<button className="btnRound" onClick={this.props.sendSpeed}><img src={require('./styles/assets/plus-sign.svg')} alt="plus sign"/></button>
+									<button className="btnRound" onClick={this.props.sendDecreseSpeed}><img src={require('./styles/assets/minus-sign.svg')} alt="minus sign"/></button>
 							</div>
 							<div className="cell small-12">
-								<label>Speed</label>
-								<button className="btnIcon" onClick={this.props.sendSpeed}><i className="icon ion-md-add-circle"/></button>
-								<button className="btnIcon" onClick={this.props.sendDecreseSpeed}><i className="icon ion-md-remove-circle"/></button>
+								<label>Squares</label>
+								<button className="btnSquare btnPush" onClick={this.props.sendAddSquare}><img src={require('./styles/assets/plus-sign.svg')} alt="plus sign"/></button>
+								<button className="btnSquare btnPush" onClick={this.props.sendRemoveSquare}><img src={require('./styles/assets/minus-sign.svg')} alt="minus sign"/></button>
 							</div>
 						</div>
 						<div className="row center">
 							<div className="cell small-12">
-								<label>Squares</label>
-								<button className="btn btnPush" onClick={this.props.sendAddSquare}>Add Square</button>
-								<button className="btn btnPush" onClick={this.props.sendRemoveSquare}>Remove Square</button>
-							</div>
+								<label>Play Pause</label>
+								<button className="btnIcon" onClick={this.props.playFrameRate}><i className="icon ion-md-play"/></button>
+								</div>
 						</div>
 					</div>
 					<div className="logoContainer">

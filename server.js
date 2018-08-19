@@ -27,12 +27,6 @@ io.on('connection', socket => {
 		console.log("Play Animation");
 		io.sockets.emit("playAnimation", v);
 	})
-
-	socket.on('stopFramerate', v =>{
-		console.log("Stop Animation");
-		io.sockets.emit("stopAnimation", v);
-	})
-
 	socket.on('order', v =>{
 		console.log("Changing Order to: ", v);
 		io.sockets.emit('orderReceived', v);

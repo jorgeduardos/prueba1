@@ -1,36 +1,35 @@
 body, html{
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 header{
-  padding: 20px 40px 20px 20px;
+  padding: 25px 40px 20px 40px;
   color: white;
   background-color: black;
 }
 
-header h1{
-  letter-spacing: 4px;
+#chromaLogo{
   display: inline-block;
-  height: inherit;
+  width: 190px; 
   margin: 0;
 }
 
-header h3{
+#alloyLogo{
   /*margin-left: 150px;*/
   display: inline-block;
   float: right;
   height: inherit;
   margin: 0;
-  padding-top: 5px;
-  letter-spacing: 2px;
+  width: 60px;
+  /*padding-top: 5px;*/
 
 }
 
 .UiContainer{
   height: 90vh;
-	padding: 20px 50px;
+  padding: 20px 50px;
   /*background: linear-gradient(#0ae9e2, #5337f1);*/
 }
 
@@ -38,30 +37,58 @@ header h3{
   text-transform: uppercase;
   width: 150px;
   padding: 0;
-  font-size: 1.1em;
+  font-size: 0.9em;
   text-align: center;
   line-height: 50px;
   color: #FFF;
   border-radius: 100px;
-  transition: all 0.2s ;
   background: #000;
+  border: none;
+}
+
+.btnSquare{
+  width: 50px;
+  line-height: 50px;
+  padding: 0;
+  text-align: center;
+  background: #fff;
   border-color: none;
+  margin:0 20px;
+  border: none;
+}
+
+.btnRound{
+  width: 50px;
+  line-height: 50px;
+  padding: 0;
+  text-align: center;
+  background: #fff;
+  border-radius: 1000px;
+  border-color: none;
+  margin:0 20px;
+  border: none;
+}
+
+.btnSquare img, .btnRound img{
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
 }
 
 .btnIcon{
-	font-size: 3em;
+  font-size: 3em;
 }
 
 
 .logoContainer{
-	width: 80%;
-	margin: auto;
-	margin-top: 30px;
+  width: 80%;
+  margin: auto;
+  margin-top: 30px;
   text-align: center;
 }
 
 .logoContainer img{
-	width: 80px;
+  width: 80px;
 }
 
 label{
@@ -79,11 +106,11 @@ label{
 // grid
 
 .row{
-	width: 100%;
+  width: 100%;
 }
 
 .row.center{
-	text-align: center;
+  text-align: center;
 }
 
 .cell{
@@ -91,8 +118,8 @@ label{
 }
 
 .small-6{
-	width: 50%;
-	display: inline-block;
+  width: 50%;
+  display: inline-block;
 }
 .small-12{
   width: 100%;
