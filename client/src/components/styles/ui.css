@@ -28,7 +28,7 @@ header{
 }
 
 .UiContainer{
-  height: 90vh;
+  height: 85vh;
   padding: 20px 50px;
   /*background: linear-gradient(#0ae9e2, #5337f1);*/
 }
@@ -119,6 +119,58 @@ label{
   text-transform: uppercase;
 }
 
+#alloyHash{
+  color: white;
+}
+
+/*form*/
+
+ #mc_embed_signup{
+  background:#000; 
+  clear:left; 
+  width:100%;
+}
+
+#mc-embedded-subscribe{
+  border: 1px solid #fff; 
+  width: 200px;
+  margin-top: 15px;
+}
+
+#mce-EMAIL{
+  border-radius: 0px;
+  height: 45px !important;
+  background: linear-gradient(to right, #FAF305, #83FF8F);
+  padding-left: 15px !important; 
+  color: #000;
+
+}
+
+/*footer*/
+
+.social-icons{
+  width: 30px;
+  margin: 20px 6px;
+}
+
+#copyrightContainer{
+  margin-top: 20px;
+}
+
+#alloyLogo2{
+  /*margin-left: 150px;*/
+  display: inline-block;
+  height: inherit;
+  margin: 0;
+  width: 60px;
+}
+
+.copyRight{
+  margin: 0;
+  margin-left: 20px;
+  display: inline-block;
+  font-size: 0.6em;
+}
 
 // grid
 

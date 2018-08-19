@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import './styles/ui.css';
 
+var formStyles ={
+	position: "absolute", 
+	left: "-5000px"
+}
+
 class UI extends Component {
 	constructor(props){
 		super(props);
@@ -113,15 +118,44 @@ class UI extends Component {
 				<div id="infoContainer">
 					<div className="infoDescription">
 						<h3>About The Chroma Series</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, repellat non vitae nesciunt ullam, architecto animi
-						 facilis fugit sunt voluptatibus totam laboriosam placeat, quibusdam quod delectus aliquam ex ipsam, dicta. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam vel aliquam soluta porro. Mol
-						 itia, deserunt, aperiam. In quis sit delectus architecto temporibus veritatis eligendi ipsam! Ex harum, officia neque dolores! Lorem ipsum dolor sit amet, consectetur adip
-						 isicing elit. Unde, explicabo eum porro dol
-						 res error quis voluptate totam eius voluptates nesciunt quaerat, voluptas harum quo, modi soluta rerum. Excepturi necessitatibus, amet.</p>
+						<p>Chroma is a dual-platform interactive art experience that invites you to experiment with colors, gradients, and motion, and to explore the relationships that exist between them.
+<br/><br/>
+It’s entirely made with code using Node.js, React, and p5.js
+<br/><br/>
+Share your artwork on Instagram by using hashtag <a id="alloyHash" href="https://www.instagram.com/explore/tags/chromabyalloy/">#chromabyalloy</a>.
+<br/><br/>
+We’ll be releasing more art pieces from the Chroma series soon. If you want to know when our next piece goes live, sign up to get an email reminder. Thanks, and enjoy the art!</p>
 					</div>
-					<div className="infoForm"></div>
+					<div className="infoForm">
+						<div id="mc_embed_signup">
+							<form action="https://wearealloy.us14.list-manage.com/subscribe/post?u=bb55fcc2da0f449b6b0b95c70&amp;id=77d991fbdd" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="_blank" novalidate>
+							    <div id="mc_embed_signup_scroll">
+									<input type="email" value="" name="EMAIL" className="email" id="mce-EMAIL" placeholder="EMAIL" required/>
+						    		<div style={formStyles} aria-hidden="true">
+						    			<input type="text" name="b_bb55fcc2da0f449b6b0b95c70_77d991fbdd" tabindex="-1" value=""/>
+						    		</div>
+							    	<div className="clear">
+							    		<input type="submit" value="SEND ME A REMINDER" name="subscribe" id="mc-embedded-subscribe" className="btn"/>
+							    	</div>
+							    </div>
+							</form>
+						</div>
+					</div>
+					<div className="infoFooter">
+						<div className="row center">
+							<a href="#">
+								<img className="social-icons" src={require('./styles/assets/facebook-icon.svg')} alt="Facebook"/>
+							</a>
+							<a href="#">
+								<img className="social-icons" src={require('./styles/assets/instagram-icon.svg')} alt="Instagram"/>
+							</a>
+						</div>
+						<div className="row center" id="copyrightContainer">
+							<img id="alloyLogo2" src={require("./styles/assets/alloy-logo.svg")} alt="alloy logo"/>
+							<h6 className="copyRight">&copy; 2018 Alloy Studio, LLC</h6>
+						</div>
+					</div>
 				</div>
-				<div className="infoFooter"></div>
 			</div>
 		)
 	}
