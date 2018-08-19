@@ -86,7 +86,7 @@ class Main extends Component {
 		e.preventDefault();
 		const socket = socketIOClient(this.state.endpoint);
 		var colorPallet;
-		this.state.colorPallet < 1 ? colorPallet = this.state.colorPallet+1: colorPallet = 0;
+		this.state.colorPallet < 2 ? colorPallet = this.state.colorPallet+1: colorPallet = 0;
 		socket.emit('colorPallet', colorPallet);
 	}
 

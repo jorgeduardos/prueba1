@@ -156,14 +156,19 @@ export default function sketch (p) {
   }
 
   var colorPallets = [
-    {
-      backgrounds: ["#0ae9e2", "#5337f1"],
-      squares:["#ffff2c", "#fae148", "#f6c365", "#f1a581", "#ed869d", "#e868b9", "#e44ad6", "#df2cf2"]
-    },
-    { 
-      backgrounds: ["#e866d3", "#80379c"],
-      squares:["#fe9c8f", "#feb2a8", "#fec8c1", "#fad9c1", "#f9caa7", "#faf0e6", "#fff5ee", "#fdf5e6"]
+      {
+        backgrounds: ["#0ae9e2", "#5337f1"],
+        squares:["#E85431", "#D8D560", "#E868B9", "#ED869D", "#F1A581", "#F6C365", "#F2E086", "#DF2CF2"]
+      },
+      { 
+        backgrounds: ["#8916D7", "#FE421B"],
+        squares:["#2E8DFF", "#FAE148", "#2230E0", "#F1A581", "#ED869D", "#E868B9", "#E44AD6", "#DF2CF2"]
 
-    }
+      },
+      { 
+        backgrounds: ["#2100FF", "#FFD7AA"],
+        squares:["#2E4CFF", "#2D66DB", "#2C7FB6", "#2B9992", "#29B26D", "#28CC49", "#27E524", "#26FF00"]
+
+      }
   ]
 };
