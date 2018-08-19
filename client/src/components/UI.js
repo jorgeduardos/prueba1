@@ -98,16 +98,30 @@ class UI extends Component {
 							</div>
 						</div>
 						<div className="row center">
-							<div className="cell small-12">
-								<label>Play Pause</label>
-								<button className="btnIcon" onClick={this.props.playFrameRate}><i className="icon ion-md-play"/></button>
-								</div>
+							<div className="cell small-6">
+								<button className="btn btnPush" onClick={this.props.playFrameRate}>Play / Pause</button>
+							</div>
+							<div className="cell small-6">
+								<button className="btn btnPush" onClick={this.props.sendReset}>Reset</button>
+							</div>
 						</div>
 					</div>
 					<div className="logoContainer">
 						<img src={require('./sketches/assets/alloy-wink.png')} alt="Alloy Wink Logo"/>
 					</div>
 				</div>
+				<div id="infoContainer">
+					<div className="infoDescription">
+						<h3>About The Chroma Series</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, repellat non vitae nesciunt ullam, architecto animi
+						 facilis fugit sunt voluptatibus totam laboriosam placeat, quibusdam quod delectus aliquam ex ipsam, dicta. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam vel aliquam soluta porro. Mol
+						 itia, deserunt, aperiam. In quis sit delectus architecto temporibus veritatis eligendi ipsam! Ex harum, officia neque dolores! Lorem ipsum dolor sit amet, consectetur adip
+						 isicing elit. Unde, explicabo eum porro dol
+						 res error quis voluptate totam eius voluptates nesciunt quaerat, voluptas harum quo, modi soluta rerum. Excepturi necessitatibus, amet.</p>
+					</div>
+					<div className="infoForm"></div>
+				</div>
+				<div className="infoFooter"></div>
 			</div>
 		)
 	}

@@ -31,6 +31,7 @@ class Main extends Component {
 		this.sendDecreseSpeed = this.sendDecreseSpeed.bind(this);
 		this.sendAddSquare = this.sendAddSquare.bind(this);
 		this.sendRemoveSquare = this.sendRemoveSquare.bind(this);
+		this.sendReset = this.sendReset.bind(this);
 	}
 
 	componentDidMount(){
@@ -62,6 +63,14 @@ class Main extends Component {
 		}))
 		socket.on('removeSquareReceived', v => this.setState({
 			squaresToDisplay: v
+		}))
+		socket.on('resetReceived', ()=> this.setState({
+			colorPallet: 0,
+			frameRate: "play",
+			order: 1,
+			blendMode: 1,
+			rotationSpeed: 0.1,
+			squaresToDisplay: 2
 		}))
 	}
 	playFrameRate(e){
@@ -129,12 +138,17 @@ class Main extends Component {
 		socket.emit('decreseRotationSpeed', rotationSpeed);
 	}
 
+	sendReset(e){
+		e.preventDefault();
+		const socket = socketIOClient(this.state.endpoint);
+		socket.emit('reset');
+	}
 
 	render(){
 		return(
 			<Router>
 				<div>
-					<Route exact path="/" render={ (props) => <UI colorPallet={this.state.colorPallet} sendAddSquare={this.sendAddSquare} sendRemoveSquare={this.sendRemoveSquare} blendMode={this.state.blendMode} sendColorPallet={this.sendColorPallet} playFrameRate={this.playFrameRate} sendOrder={this.sendOrder} sendBlendMode={this.sendBlendMode} sendSpeed={this.sendSpeed} sendDecreseSpeed={this.sendDecreseSpeed}/>} />
+					<Route exact path="/" render={ (props) => <UI sendReset={this.sendReset} colorPallet={this.state.colorPallet} sendAddSquare={this.sendAddSquare} sendRemoveSquare={this.sendRemoveSquare} blendMode={this.state.blendMode} sendColorPallet={this.sendColorPallet} playFrameRate={this.playFrameRate} sendOrder={this.sendOrder} sendBlendMode={this.sendBlendMode} sendSpeed={this.sendSpeed} sendDecreseSpeed={this.sendDecreseSpeed}/>} />
 					<Route exact path="/art" render={ (props) => <App squaresToDisplay={this.state.squaresToDisplay} colorPallet={this.state.colorPallet} frameRate={this.state.frameRate} clicked={this.state.clicked} order={this.state.order} blendMode={this.state.blendMode} rotationSpeed={this.state.rotationSpeed}/>} />
 				</div>
 			</Router>

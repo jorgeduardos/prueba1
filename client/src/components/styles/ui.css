@@ -103,6 +103,23 @@ label{
 }
 
 
+/*Informatiion*/
+
+#infoContainer{
+  padding: 25px 40px;
+  height: 100vh;
+  background-color: black;
+  color: white;
+}
+
+#infoContainer h3{
+  text-align: center;
+  font-size: 1.7em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+
 // grid
 
 .row{

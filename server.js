@@ -56,10 +56,14 @@ io.on('connection', socket => {
 		io.sockets.emit('removeSquareReceived', v);
 	})
 
+	socket.on('reset', ()=>{
+		console.log('Reseting to default state');
+		io.sockets.emit('resetReceived');
+	})
+
 	socket.on('disconnect', () => {
 		console.log('User has disconnected');
 	})
-
 });
 
 if (process.env.NODE_ENV === "production") {
