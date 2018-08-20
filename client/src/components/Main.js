@@ -16,8 +16,8 @@ class Main extends Component {
 			rotationSpeed: 0.1,
 			squaresToDisplay: 2,
 			clicked: false,
-			endpoint: "http://127.0.0.1:4001"
-			// endpoint: window.location.hostname
+			// endpoint: "http://127.0.0.1:4001"
+			endpoint: window.location.hostname
 		};
 		// this.setState({
 		// 	prueba: window.location.hostname;
