@@ -117,7 +117,7 @@ class Main extends Component {
 		e.preventDefault();
 		const socket = socketIOClient(this.state.endpoint);
 		var blendMode;
-		this.state.blendMode < 10 ? blendMode = this.state.blendMode + 1: blendMode = 1;
+		this.state.blendMode < 4 ? blendMode = this.state.blendMode + 1: blendMode = 1;
 		socket.emit('blendMode', blendMode);
 
 	}

@@ -28,7 +28,7 @@ header{
 }
 
 .UiContainer{
-  height: 85vh;
+  height: 86vh;
   padding: 20px 50px;
   /*background: linear-gradient(#0ae9e2, #5337f1);*/
 }
@@ -107,7 +107,7 @@ label{
 
 #infoContainer{
   padding: 25px 40px;
-  height: 100vh;
+  /*height: 100vh;*/
   background-color: black;
   color: white;
 }
@@ -163,6 +163,8 @@ label{
   height: inherit;
   margin: 0;
   width: 60px;
+  height: 30px;
+  vertical-align: bottom;
 }
 
 .copyRight{
@@ -170,6 +172,7 @@ label{
   margin-left: 20px;
   display: inline-block;
   font-size: 0.6em;
+  padding-bottom: 10px;
 }
 
 // grid
@@ -196,4 +199,38 @@ label{
 
 .uppercase{
   text-transform: uppercase;
+}
+
+@media(max-width: 420px){
+  body{
+    font-size: 0.9em;
+  }
+
+  .btn{
+    width: 125px;
+  }
+}
+
+@media(max-width: 375px){
+  body{
+    font-size: 0.9em;
+  }
+
+  .UiContainer{
+    height: auto;
+  }
+
+  .btn{
+    width: 100px;
+    font-size: 0.8em;
+  }
+
+  #chromaLogo{
+    width: 150px
+  }
+
+  #alloyLogo{
+    width: 45px;
+  }
+
 }

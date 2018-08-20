@@ -26,7 +26,8 @@ class UI extends Component {
 			      squares:["#2E4CFF", "#2D66DB", "#2C7FB6", "#2B9992", "#29B26D", "#28CC49", "#27E524", "#26FF00"]
 
 			    }
-			]
+			],
+			imput: ""
 		}
 
 		this.backgroundSetter = this.backgroundSetter.bind(this);
@@ -38,41 +39,28 @@ class UI extends Component {
 		return color;
 	}
 
+	imputSetter(e){
+		this.setState({
+			imput: e.target.value
+		});
+	}
+
 
 	currentBlendMode(v){
 
 		var blenMode;
 		switch(v){
 	      case 1: 
-	        blenMode = "DIFFERENCE";
+	        blenMode = "Difference";
 	        break;
 	      case 2:
-	        blenMode = "SOFT_LIGHT";
+	        blenMode = "Exclusion";
 	        break;
 	      case 3:
-	        blenMode = "EXCLUSION";
+	        blenMode = "Soft Light";
 	        break;
 	      case 4:
-	        blenMode = "BLEND";
-	        break;
-	      case 5:
-	        blenMode = "OVERLAY";
-	        break;
-	      case 6:
-	        blenMode = "MULTIPLY";
-	        break;
-	      case 7:
-	        blenMode = "SOFT_LIGHT";
-	        break;
-	      case 8:
-	        blenMode = "HARD_LIGHT";
-	        break;
-	      case 9:
-	        blenMode = "DODGE";
-	        break;
-	      case 10:
-	        blenMode = "SCREEN";
-	        break;
+	        blenMode = "Hard Light";
     	}
     	return blenMode;
 	}
@@ -135,7 +123,7 @@ We’ll be releasing more art pieces from the Chroma series soon. If you want to
 						<div id="mc_embed_signup">
 							<form action="https://wearealloy.us14.list-manage.com/subscribe/post?u=bb55fcc2da0f449b6b0b95c70&amp;id=77d991fbdd" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="_blank" novalidate>
 							    <div id="mc_embed_signup_scroll">
-									<input type="email" value="" name="EMAIL" className="email" id="mce-EMAIL" placeholder="EMAIL" required/>
+									<input type="email" value={this.state.imput} onChange={this.imputSetter.bind(this)} name="EMAIL" className="email" id="mce-EMAIL" placeholder="EMAIL" required/>
 						    		<div style={formStyles} aria-hidden="true">
 						    			<input type="text" name="b_bb55fcc2da0f449b6b0b95c70_77d991fbdd" tabindex="-1" value=""/>
 						    		</div>

@@ -28,7 +28,8 @@ export default function sketch (p) {
     c2 = p.color("#0ae9e2");
     loop = true;
     for (var i = 0; i < numberSquares; i++) {
-      rectangles[i] = new Rectangle(0 , 0, ((numberSquares-i)*100) - 100, ((numberSquares-i)*100) - 100);
+      rectangles[i] = new Rectangle(0 , 0, p.windowHeight-(i*100), p.windowHeight-(i*100));
+      // rectangles[i] = new Rectangle(0 , 0, ((numberSquares-i)*100) - 100, ((numberSquares-i)*100) - 100);
     }
   };
 
@@ -71,31 +72,13 @@ export default function sketch (p) {
         p.blendMode(p.DIFFERENCE);
         break;
       case 2:
-        p.blendMode(p.SOFT_LIGHT);
-        break;
-      case 3:
         p.blendMode(p.EXCLUSION);
         break;
-      case 4:
-        p.blendMode(p.BLEND);
-        break;
-      case 5:
-        p.blendMode(p.OVERLAY);
-        break;
-      case 6:
-        p.blendMode(p.MULTIPLY);
-        break;
-      case 7:
+      case 3:
         p.blendMode(p.SOFT_LIGHT);
         break;
-      case 8:
+      case 4:
         p.blendMode(p.HARD_LIGHT);
-        break;
-      case 9:
-        p.blendMode(p.DODGE);
-        break;
-      case 10:
-        p.blendMode(p.SCREEN);
     }
     p.translate(p.windowWidth/2, p.windowHeight/2);
     for (var i = 0; i < squaresToDisplay; i++) {
