@@ -133,8 +133,9 @@ label{
 
 #mc-embedded-subscribe{
   border: 1px solid #fff; 
-  width: 200px;
+  width: 200px !important;
   margin-top: 15px;
+  line-height: 50px !important;
 }
 
 #mce-EMAIL{
