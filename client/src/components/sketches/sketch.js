@@ -2,13 +2,11 @@ export default function sketch (p) {
   
   // p5.disableFriendlyErrors = true;
   var rectangles = [];
-  var disorderedRectangles = [];
   // gradient related 
   var Y_AXIS = 1;
   var X_AXIS = 2;
   var b1, b2, c1, c2;
 
-  var img;
   var loop;
   var blendMode;
   var rotationSpeed;
@@ -76,6 +74,9 @@ export default function sketch (p) {
         break;
       case 3:
         p.blendMode(p.HARD_LIGHT);
+        break;
+      default:
+        p.blendMode(p.DIFFERENCE)
     }
     p.translate(p.windowWidth/2, (p.windowHeight-30)/2);
     for (var i = 0; i < squaresToDisplay; i++) {
@@ -99,7 +100,7 @@ export default function sketch (p) {
     this.h = h;
     this.deg = 0;
     this.rotate = function(direction, speed){
-      if(direction == 1){
+      if(direction === 1){
         this.deg += speed;
       }else{
         this.deg += speed;

@@ -1,5 +1,5 @@
 import React from'react';
-import P5Wrapper from 'react-p5-wrapper';
+import P5Wrapper from './P5Wrapper.js';
 import sketch from './sketches/sketch';
 import './styles/label.css';
 
