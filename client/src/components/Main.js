@@ -12,12 +12,13 @@ class Main extends Component {
 			colorPallet: 0,
 			frameRate: "play",
 			order: 1,
-			blendMode: 1,
-			rotationSpeed: 0.1,
-			squaresToDisplay: 2,
+			blendMode: 2,
+			rotationSpeed: 0.3,
+			squaresToDisplay: 5,
 			clicked: false,
-			// endpoint: "http://127.0.0.1:4001"
-			endpoint: window.location.hostname
+			btnClicked: false,
+			endpoint: "http://127.0.0.1:4001"
+			// endpoint: window.location.hostname
 		};
 		// this.setState({
 		// 	prueba: window.location.hostname;
@@ -68,9 +69,10 @@ class Main extends Component {
 			colorPallet: 0,
 			frameRate: "play",
 			order: 1,
-			blendMode: 1,
-			rotationSpeed: 0.1,
-			squaresToDisplay: 2
+			blendMode: 2,
+			rotationSpeed: 0.3,
+			btnClicked: false,
+			squaresToDisplay: 5
 		}))
 	}
 	playFrameRate(e){
@@ -117,13 +119,16 @@ class Main extends Component {
 		e.preventDefault();
 		const socket = socketIOClient(this.state.endpoint);
 		var blendMode;
-		this.state.blendMode < 4 ? blendMode = this.state.blendMode + 1: blendMode = 1;
+		this.state.blendMode < 3 ? blendMode = this.state.blendMode + 1: blendMode = 1;
 		socket.emit('blendMode', blendMode);
 
 	}
 
 	sendSpeed(e){
 		e.preventDefault();
+		this.setState({
+			btnClicked: true
+		})
 		const socket = socketIOClient(this.state.endpoint);
 		var rotationSpeed;
 		this.state.rotationSpeed < 1 ? rotationSpeed = this.state.rotationSpeed + 0.1 : rotationSpeed = 1;
@@ -132,9 +137,12 @@ class Main extends Component {
 
 	sendDecreseSpeed(e){
 		e.preventDefault();
+		this.setState({
+			btnClicked: true
+		})
 		const socket = socketIOClient(this.state.endpoint);
 		var rotationSpeed;
-		this.state.rotationSpeed > 0.1 ? rotationSpeed = this.state.rotationSpeed - 0.1 : rotationSpeed = 0.1;
+		this.state.rotationSpeed >= 0.1 ? rotationSpeed = this.state.rotationSpeed - 0.1 : rotationSpeed = 0.1;
 		socket.emit('decreseRotationSpeed', rotationSpeed);
 	}
 
@@ -148,7 +156,7 @@ class Main extends Component {
 		return(
 			<Router>
 				<div>
-					<Route exact path="/" render={ (props) => <UI sendReset={this.sendReset} colorPallet={this.state.colorPallet} sendAddSquare={this.sendAddSquare} sendRemoveSquare={this.sendRemoveSquare} blendMode={this.state.blendMode} sendColorPallet={this.sendColorPallet} playFrameRate={this.playFrameRate} sendOrder={this.sendOrder} sendBlendMode={this.sendBlendMode} sendSpeed={this.sendSpeed} sendDecreseSpeed={this.sendDecreseSpeed}/>} />
+					<Route exact path="/" render={ (props) => <UI squaresToDisplay={this.state.squaresToDisplay} btnClicked={this.state.btnClicked} rotationSpeed={this.state.rotationSpeed} sendReset={this.sendReset} colorPallet={this.state.colorPallet} sendAddSquare={this.sendAddSquare} sendRemoveSquare={this.sendRemoveSquare} blendMode={this.state.blendMode} sendColorPallet={this.sendColorPallet} playFrameRate={this.playFrameRate} sendOrder={this.sendOrder} sendBlendMode={this.sendBlendMode} sendSpeed={this.sendSpeed} sendDecreseSpeed={this.sendDecreseSpeed}/>} />
 					<Route exact path="/art" render={ (props) => <App squaresToDisplay={this.state.squaresToDisplay} colorPallet={this.state.colorPallet} frameRate={this.state.frameRate} clicked={this.state.clicked} order={this.state.order} blendMode={this.state.blendMode} rotationSpeed={this.state.rotationSpeed}/>} />
 				</div>
 			</Router>

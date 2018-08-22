@@ -7,6 +7,10 @@ var formStyles ={
 	left: "-5000px"
 }
 
+var disabledBtnStyles = {
+	opacity: "0.3"
+}
+
 class UI extends Component {
 	constructor(props){
 		super(props);
@@ -27,7 +31,8 @@ class UI extends Component {
 
 			    }
 			],
-			imput: ""
+			imput: "",
+			submitImput: "SEND ME A REMINDER"
 		}
 
 		this.backgroundSetter = this.backgroundSetter.bind(this);
@@ -45,7 +50,6 @@ class UI extends Component {
 		});
 	}
 
-
 	currentBlendMode(v){
 
 		var blenMode;
@@ -54,12 +58,9 @@ class UI extends Component {
 	        blenMode = "Difference";
 	        break;
 	      case 2:
-	        blenMode = "Exclusion";
-	        break;
-	      case 3:
 	        blenMode = "Soft Light";
 	        break;
-	      case 4:
+	      case 3:
 	        blenMode = "Hard Light";
     	}
     	return blenMode;
@@ -69,7 +70,7 @@ class UI extends Component {
 		// change blend mode to only display soft and hard!
 		return(
 			<div id="UI">
-				<header><img id="chromaLogo" src={require("./styles/assets/chroma-logo.svg")} alt="Chroma Logo"/><img id="alloyLogo" src={require("./styles/assets/alloy-logo.svg")} alt="alloy logo"/></header>
+				<header><img id="chromaLogo" src={require("./styles/assets/chroma-logo.svg")} alt="Chroma Logo"/><a target="_blank" href="https://wearealloy.com/"><img id="alloyLogo" src={require("./styles/assets/alloy-logo.svg")} alt="alloy logo"/></a></header>
 				<div style={this.backgroundSetter()} className="UiContainer">
 					<div className="uiControlersContainer uppercase">
 						<div className="row center">
@@ -86,38 +87,38 @@ class UI extends Component {
 						<div className="row center">
 							<div className="cell small-12">
 									<label>Speed</label>
-									<button className="btnRound" onClick={this.props.sendSpeed}><img src={require('./styles/assets/plus-sign.svg')} alt="plus sign"/></button>
-									<button className="btnRound" onClick={this.props.sendDecreseSpeed}><img src={require('./styles/assets/minus-sign.svg')} alt="minus sign"/></button>
+									<button style={this.props.rotationSpeed <= 0.1 && this.props.btnClicked ? disabledBtnStyles : null} className="btnRound" onClick={this.props.sendDecreseSpeed}><img src={require('./styles/assets/minus-sign.svg')} alt="minus sign"/></button>
+									<button style={this.props.rotationSpeed >= 1 && this.props.btnClicked ? disabledBtnStyles : null} className="btnRound" onClick={this.props.sendSpeed}><img src={require('./styles/assets/plus-sign.svg')} alt="plus sign"/></button>
 							</div>
 							<div className="cell small-12">
 								<label>Squares</label>
-								<button className="btnSquare btnPush" onClick={this.props.sendAddSquare}><img src={require('./styles/assets/plus-sign.svg')} alt="plus sign"/></button>
-								<button className="btnSquare btnPush" onClick={this.props.sendRemoveSquare}><img src={require('./styles/assets/minus-sign.svg')} alt="minus sign"/></button>
+								<button style={this.props.squaresToDisplay === 2 ? disabledBtnStyles: null} className="btnSquare btnPush" onClick={this.props.sendRemoveSquare}><img src={require('./styles/assets/minus-sign.svg')} alt="minus sign"/></button>
+								<button style={this.props.squaresToDisplay === 8 ? disabledBtnStyles: null} className="btnSquare btnPush" onClick={this.props.sendAddSquare}><img src={require('./styles/assets/plus-sign.svg')} alt="plus sign"/></button>
 							</div>
 						</div>
-						<div className="row center">
-							<div className="cell small-6">
-								<button className="btn btnPush" onClick={this.props.playFrameRate}>Play / Pause</button>
+						<div className="row center lastRow">
+							<div className="cell small-8">
+								<button className="btn btnPush btnPlay" onClick={this.props.playFrameRate}>Pause/Play</button>
 							</div>
-							<div className="cell small-6">
-								<button className="btn btnPush" onClick={this.props.sendReset}>Reset</button>
+							<div className="cell small-4">
+								<button className="btn btnPush btnReset" onClick={this.props.sendReset}>Reset</button>
 							</div>
 						</div>
-					</div>
-					<div className="logoContainer">
-						<img src={require('./sketches/assets/alloy-wink.png')} alt="Alloy Wink Logo"/>
 					</div>
 				</div>
 				<div id="infoContainer">
 					<div className="infoDescription">
-						<h3>About The Chroma Series</h3>
+						<h3 id="aboutChroma">About The Chroma Series</h3>
 						<p>Chroma is a dual-platform interactive art experience that invites you to experiment with colors, gradients, and motion, and to explore the relationships that exist between them.
 <br/><br/>
 It’s entirely made with code using Node.js, React, and p5.js
 <br/><br/>
-Share your artwork on Instagram by using hashtag <a id="alloyHash" href="https://www.instagram.com/explore/tags/chromabyalloy/">#chromabyalloy</a>.
+Customize the piece and share your artwork on Instagram by using hashtag  <a id="alloyHash" href="https://www.instagram.com/explore/tags/chromabyalloy/">#chromabyalloy</a>.
 <br/><br/>
-We’ll be releasing more art pieces from the Chroma series soon. If you want to know when our next piece goes live, sign up to get an email reminder. Thanks, and enjoy the art!</p>
+We’ll be releasing more art pieces from the Chroma series soon. If you want to know when our next piece goes live, sign up to get an email reminder. Or, to get in touch directly with us, send us an email to <a target="_blank" href="mailto:hello@wearealloy.com">hello@wearealloy.com</a>.
+<br/><br/>
+Thanks, and enjoy the art!
+</p>
 					</div>
 					<div className="infoForm">
 						<div id="mc_embed_signup">
@@ -128,7 +129,7 @@ We’ll be releasing more art pieces from the Chroma series soon. If you want to
 						    			<input type="text" name="b_bb55fcc2da0f449b6b0b95c70_77d991fbdd" tabindex="-1" value=""/>
 						    		</div>
 							    	<div className="clear">
-							    		<input type="submit" value="SEND ME A REMINDER" name="subscribe" id="mc-embedded-subscribe" className="btn"/>
+							    		<input type="submit" value={this.state.submitImput} name="subscribe" id="mc-embedded-subscribe" className="btn"/>
 							    	</div>
 							    </div>
 							</form>
@@ -144,7 +145,7 @@ We’ll be releasing more art pieces from the Chroma series soon. If you want to
 							</a>
 						</div>
 						<div className="row center" id="copyrightContainer">
-							<img id="alloyLogo2" src={require("./styles/assets/alloy-logo.svg")} alt="alloy logo"/>
+							<a target="_blank" href="https://wearealloy.com/"><img id="alloyLogo2" src={require("./styles/assets/alloy-logo.svg")} alt="alloy logo"/></a>
 							<h6 className="copyRight">&copy; 2018 Alloy Studio, LLC</h6>
 						</div>
 					</div>

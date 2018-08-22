@@ -2,7 +2,8 @@ const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
 
-const PORT = process.env.PORT || 4001;
+// const PORT = 19684;
+const PORT = 4001;
 
 const app = express();
 
@@ -43,8 +44,10 @@ io.on('connection', socket => {
 	})
 
 	socket.on('decreseRotationSpeed', v => {
-		console.log("Chaging Speed to: ", v);
-		io.sockets.emit('decreaseRotationSpeedReceived', v);
+		var rotation;
+		v <= 0.1 ? rotation = 0.1 : rotation =v;
+		console.log("Chaging Speed to: ", rotation);
+		io.sockets.emit('decreaseRotationSpeedReceived', rotation);
 	})
 
 	socket.on('addSquare', v => {

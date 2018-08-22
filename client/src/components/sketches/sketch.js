@@ -18,7 +18,7 @@ export default function sketch (p) {
   var colorPallet = 0;
 
   p.setup = function () {
-    p.createCanvas(p.windowWidth, p.windowHeight);
+    p.createCanvas(p.windowWidth, p.windowHeight-30);
     p.angleMode(p.DEGREES);
 
     //gradient related
@@ -28,7 +28,7 @@ export default function sketch (p) {
     c2 = p.color("#0ae9e2");
     loop = true;
     for (var i = 0; i < numberSquares; i++) {
-      rectangles[i] = new Rectangle(0 , 0, p.windowHeight-(i*100), p.windowHeight-(i*100));
+      rectangles[i] = new Rectangle(0 , 0, ((p.windowHeight-230)-(i*100)), ((p.windowHeight-230)-(i*100)));
       // rectangles[i] = new Rectangle(0 , 0, ((numberSquares-i)*100) - 100, ((numberSquares-i)*100) - 100);
     }
   };
@@ -72,17 +72,17 @@ export default function sketch (p) {
         p.blendMode(p.DIFFERENCE);
         break;
       case 2:
-        p.blendMode(p.EXCLUSION);
-        break;
-      case 3:
         p.blendMode(p.SOFT_LIGHT);
         break;
-      case 4:
+      case 3:
         p.blendMode(p.HARD_LIGHT);
     }
-    p.translate(p.windowWidth/2, p.windowHeight/2);
+    p.translate(p.windowWidth/2, (p.windowHeight-30)/2);
     for (var i = 0; i < squaresToDisplay; i++) {
       rectangles[i].display(i, colorPallets[colorPallet].squares[i]);
+      // loop ? rectangles[i].rotate(1, rotationSpeed) : null
+    }
+    for (var i = 0; i < rectangles.length; i++) {
       loop ? rectangles[i].rotate(1, rotationSpeed) : null
     }     
     p.pop();
