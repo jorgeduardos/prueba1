@@ -15,6 +15,10 @@ export default function sketch (p) {
   var squaresToDisplay;
   var colorPallet = 0;
 
+  var translateWidth = p.windowWidth/2;
+  var translateHeight = (p.windowHeight-30)/2;
+
+
   p.setup = function () {
     p.createCanvas(p.windowWidth, p.windowHeight-30);
     p.angleMode(p.DEGREES);
@@ -76,24 +80,21 @@ export default function sketch (p) {
         p.blendMode(p.HARD_LIGHT);
         break;
       default:
-        p.blendMode(p.DIFFERENCE)
+        p.blendMode(p.DIFFERENCE);
     }
-    p.translate(p.windowWidth/2, (p.windowHeight-30)/2);
-    for (var i = 0; i < squaresToDisplay; i++) {
+    p.translate(translateWidth, translateHeight);
+    for (let i = 0; i < squaresToDisplay; i++) {
       rectangles[i].display(i, colorPallets[colorPallet].squares[i]);
       // loop ? rectangles[i].rotate(1, rotationSpeed) : null
     }
-    for (var i = 0; i < rectangles.length; i++) {
-      loop ? rectangles[i].rotate(1, rotationSpeed) : null
+    for (let i = 0; i < rectangles.length; i++) {
+      loop ? rectangles[i].rotate(1, rotationSpeed) : null;
     }     
     p.pop();
   };
 
   function Rectangle(posx1, posy1, l, h){
     this.id = 0;
-    this.r = p.random(0,255);
-    this.g = p.random(0,255);
-    this.b = p.random(0,255);
     this.x1 = posx1;
     this.y1 = posy1;
     this.l = l;
@@ -121,17 +122,17 @@ export default function sketch (p) {
     p.noFill();
 
     if (axis == Y_AXIS) {  // Top to bottom gradient
-      for (var i = y; i <= y+h; i++) {
-        var inter = p.map(i, y, y+h, 0, 1);
-        var c = p.lerpColor(c1, c2, inter);
+      for (let i = y; i <= y+h; i++) {
+        let inter = p.map(i, y, y+h, 0, 1);
+        let c = p.lerpColor(c1, c2, inter);
         p.stroke(c);
         p.line(x, i, x+w, i);
       }
     }  
     else if (axis == X_AXIS) {  // Left to right gradient
-      for (var i = x; i <= x+w; i++) {
-        var inter = p.map(i, x, x+w, 0, 1);
-        var c = p.lerpColor(c1, c2, inter);
+      for (let i = x; i <= x+w; i++) {
+        let inter = p.map(i, x, x+w, 0, 1);
+        let c = p.lerpColor(c1, c2, inter);
         p.stroke(c);
         p.line(i, y, i, y+h);
       }

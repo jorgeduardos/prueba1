@@ -10,6 +10,8 @@ var disabledBtnStyles = {
 	opacity: "0.3"
 }
 
+var instagram =require('./styles/assets/instagram-icon.svg');
+var facebook = require('./styles/assets/facebook-icon.svg');
 class UI extends Component {
 	constructor(props){
 		super(props);
@@ -61,6 +63,8 @@ class UI extends Component {
 	        break;
 	      case 3:
 	        blenMode = "Hard Light";
+	      default:
+	      	blenMode = "Difference";
     	}
     	return blenMode;
 	}
@@ -137,10 +141,10 @@ Thanks, and enjoy the art!
 					<div className="infoFooter">
 						<div className="row center">
 							<a href="#">
-								<img className="social-icons" src={require('./styles/assets/facebook-icon.svg')} alt="Facebook"/>
+								<img className="social-icons" src={facebook} alt="Facebook"/>
 							</a>
 							<a href="#">
-								<img className="social-icons" src={require('./styles/assets/instagram-icon.svg')} alt="Instagram"/>
+								<img className="social-icons" src={instagram} alt="Instagram"/>
 							</a>
 						</div>
 						<div className="row center" id="copyrightContainer">
